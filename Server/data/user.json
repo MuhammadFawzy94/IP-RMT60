@@ -1,0 +1,21 @@
+[
+    {
+      "email": "user1@example.com",
+      "password": "12345678",
+      "address": "123 Jalan Merdeka, Jakarta",
+      "phoneNumber": "+6281234567890",
+      "role": "user"
+    },
+    {
+      "email": "user2@example.com",
+      "password": "12345678",
+      "address": "456 Jalan Sudirman, Bandung",
+      "role": "user"
+    },
+    {
+      "email": "user3@example.com",
+      "password": "12345678",
+      "address": "789 Jalan Thamrin, Surabaya",
+      "role": "user"
+    }
+  ]

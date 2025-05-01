@@ -1,0 +1,26 @@
+[
+    {
+      "namePackage": "Full Service",
+      "price": 500000,
+      "description": "Comprehensive vehicle maintenance including engine check, oil change, brake inspection, tire alignment, and full diagnostic.",
+      "imgUrl": "https://www.nusantara-sakti.com/images/news/Top_10_Sparepart_Yang_Sering_Diganti.jpg"
+    },
+    {
+      "namePackage": "Daily Service",
+      "price": 150000,
+      "description": "Basic daily maintenance including fluid top-up, tire pressure check, and quick exterior cleaning.",
+      "imgUrl": "https://kursusotomotif.com/sitepad-data/uploads/2024/04/Perlengkapan-socket-set.jpg"
+    },
+    {
+      "namePackage": "Change Oil",
+      "price": 200000,
+      "description": "Complete oil change service with premium synthetic oil and new oil filter replacement.",
+      "imgUrl": "https://staging-cms.motul.com/images/Scooter_7100_5100_24fa2f89e7.png"
+    },
+    {
+      "namePackage": "Electrical Service",
+      "price": 350000,
+      "description": "Thorough inspection and repair of electrical systems including battery, alternator, and wiring checks.",
+      "imgUrl": "https://astraotoshop.com/asset/article-aop/sistem-kelistrikan-motor%20(1)_20240415.webp"
+    }
+  ]
