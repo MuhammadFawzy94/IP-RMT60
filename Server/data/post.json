@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Tips Merawat Motor",
+        "content": "beberapa tips merawat motor agar tetap awet",
+        "imgUrl": "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/01/18/61710465.jpg",
+        "MechanicId": 1
+    },
+    {
+        "title": "Pilih oli yang tepat",
+        "content": "Pilih oli yang tepat untuk motor anda",
+        "imgUrl": "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/02/10/12345678.jpg",
+        "MechanicId": 2
+    },
+    {
+        "title": "Solusi ban bocor",
+        "content": "Cara mengatasi ban bocor dengan cepat dan mudah",
+        "imgUrl": "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/03/15/98765432.jpg",
+        "MechanicId": 3
+    },
+    {
+        "title": "Jangan panik saat mogok",
+        "content": "Tips menghadapi mogok di jalan",
+        "imgUrl": "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/04/20/45678901.jpg",
+        "MechanicId": 1
+    }
+]

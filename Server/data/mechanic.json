@@ -1,0 +1,167 @@
+[
+    {
+      "email": "mechanic1@example.com",
+      "password": "MechPass123!",
+      "location": "Jakarta Pusat",
+      "imageURL": "https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/100/2024/01/14/14-Hobi-Obrak-Abrik-Motor-Balap-Zainal-Arifin-1-976146497.jpg",
+      "phoneNumber": "+6281234567891",
+      "experience": "5 years",
+      "speciality": "Engine Repair",
+      "fullName": "Ahmad Zainal Arifin",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic2@example.com",
+      "password": "SecureMech456@",
+      "location": "Bandung",
+      "imageURL": "https://ipttiyogyakarta.com/wp-content/uploads/2024/11/IMG_0408-1-scaled.jpg",
+      "phoneNumber": "+6281234567892",
+      "experience": "3 years",
+      "speciality": "Engine Repair",
+      "fullName": "Budi Santoso",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic3@example.com",
+      "password": "StrongMech789#",
+      "location": "Surabaya",
+      "imageURL": "https://imgx.gridoto.com/crop/37x13:939x635/700x465/photo/2020/10/22/525870346.jpg",
+      "phoneNumber": "+6281234567893",
+      "experience": "7 years",
+      "speciality": "Engine Repair",
+      "fullName": "Hendra Wijaya",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic4@example.com",
+      "password": "FixIt321$",
+      "location": "Yogyakarta",
+      "imageURL": "https://planetban.com/media/blog/post/image_small/servis_motor.jpg",
+      "phoneNumber": "+6281234567894",
+      "experience": "4 years",
+      "speciality": "Electrical Systems",
+      "fullName": "Dedi Pratama",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic5@example.com",
+      "password": "GearUp654%",
+      "location": "Medan",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcRQTh5pQ9xaFbpRE78RF_T8clamuz5l0nQg&s",
+      "phoneNumber": "+6281234567895",
+      "experience": "6 years",
+      "speciality": "Electrical Systems",
+      "fullName": "Rudi Hartono",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic6@example.com",
+      "password": "Wrench987^",
+      "location": "Semarang",
+      "imageURL": "https://i0.wp.com/www.otomotor.co.id/web/wp-content/uploads/2025/01/apa-itu-mekanik-motor.png?fit=900%2C500&ssl=1",
+      "phoneNumber": "+6281234567896",
+      "experience": "2 years",
+      "speciality": "Electrical Systems",
+      "fullName": "Arif Setiawan",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic7@example.com",
+      "password": "TuneUp123!",
+      "location": "Makassar",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMDvFxB5I9UvQim9xjvw-I8XzCNfSyiQmBMw&s",
+      "phoneNumber": "+6281234567897",
+      "experience": "8 years",
+      "speciality": "Engine Repair",
+      "fullName": "Muhammad Faisal",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic8@example.com",
+      "password": "BoltOn456@",
+      "location": "Denpasar",
+      "imageURL": "https://img2.icarcdn.com/651201/prev-desktop_tata-motor-didik-1000-mekanik-bengkel_cover_2016_tata-motor_1.jpg",
+      "phoneNumber": "+6281234567898",
+      "experience": "5 years",
+      "speciality": "Oil Change and Service",
+      "fullName": "I Made Susila",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic9@example.com",
+      "password": "SparkPlug789#",
+      "location": "Palembang",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEXSYZy8tbXUCXeJyJSWBLmxJNbvFYWiV8tQ&s",
+      "phoneNumber": "+6281234567899",
+      "experience": "3 years",
+      "speciality": "Oil Change and Service",
+      "fullName": "Surya Pratama",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic10@example.com",
+      "password": "Torque321$",
+      "location": "Batam",
+      "imageURL": "https://ipttiyogyakarta.com/wp-content/uploads/2023/12/IMG_20230509_091936_363-1024x1024.jpg",
+      "phoneNumber": "+6281234567900",
+      "experience": "6 years",
+      "speciality": "Engine Repair",
+      "fullName": "Eko Wahyudi",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic11@example.com",
+      "password": "Piston654%",
+      "location": "Malang",
+      "imageURL": "https://ipttiyogyakarta.com/wp-content/uploads/2023/12/IMG_20230329_103909_361-scaled.jpg",
+      "phoneNumber": "+6281234567901",
+      "experience": "4 years",
+      "speciality": "Engine Repair",
+      "fullName": "Agus Santoso",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic12@example.com",
+      "password": "Crank987^",
+      "location": "Pekanbaru",
+      "imageURL": "https://s.loker.id/uploads/2024/08/profesi-mekanik-motor-tahun-2024.jpg",
+      "phoneNumber": "+6281234567902",
+      "experience": "7 years",
+      "speciality": "Oil Change and Service",
+      "fullName": "Rizki Nugroho",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic13@example.com",
+      "password": "Gasket123!",
+      "location": "Manado",
+      "imageURL": "https://cdn.autogear.id/dynamic/2023/06/03/3496/cOGbIBy5CT.jpg?w=500",
+      "phoneNumber": "+6281234567903",
+      "experience": "2 years",
+      "speciality": "Electrical Systems",
+      "fullName": "Steven Lumentut",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic14@example.com",
+      "password": "Valve456@",
+      "location": "Bogor",
+      "imageURL": "https://ipttiyogyakarta.com/wp-content/uploads/2023/12/IMG_20230403_111023_093-scaled.jpg",
+      "phoneNumber": "+6281234567904",
+      "experience": "5 years",
+      "speciality": "Engine Repair",
+      "fullName": "Dani Kurniawan",
+      "role": "mechanic"
+    },
+    {
+      "email": "mechanic15@example.com",
+      "password": "Radiator789#",
+      "location": "Balikpapan",
+      "imageURL": "https://ipttiyogyakarta.com/wp-content/uploads/2024/03/Oto-26.jpg",
+      "phoneNumber": "+6281234567905",
+      "experience": "6 years",
+      "speciality": "Electrical Systems",
+      "fullName": "Firman Syahputra",
+      "role": "mechanic"
+    }
+]
