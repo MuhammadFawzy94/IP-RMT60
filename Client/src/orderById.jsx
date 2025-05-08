@@ -1,60 +1,35 @@
-import axios from "axios";
-import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from "react-router"; // Fixed import path
+import { useEffect } from 'react';
+import { NavLink, useNavigate } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faSync, faTrash, faCheckCircle, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import Swal from 'sweetalert2'; // Import SweetAlert
+import Swal from 'sweetalert2';
+import { fetchOrders, deleteOrder, completeOrder } from './feature/orderBYId.slice';
 
 const OrderList = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { orders, loading, error } = useSelector(state => state.orderById);
   const navigate = useNavigate();
 
-  async function fetchOrders() {
-    try {
-      setLoading(true);
-      const token = localStorage.getItem("access_token");
-      
-      if (!token) {
-        setError("Authentication required. Please log in.");
-        setLoading(false);
-        return;
-      }
-  
-      // Changed to fetch all orders
-      const response = await axios.get(
-        `http://localhost:80/orders`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-      
-      console.log("Orders data:", response.data);
-      setOrders(response.data);
-      setError(null);
-    } catch (err) {
-      console.error("Error fetching orders:", err);
-      setError(err.response?.data?.message || "Failed to load orders.");
-      
-      // Show error with SweetAlert
-      Swal.fire({
-        title: 'Error',
-        text: err.response?.data?.message || "Failed to load orders.",
-        icon: 'error',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#dc3545'
-      });
-    } finally {
-      setLoading(false);
-    }
-  }
+  // Fetch orders on component mount
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
+  // Format date - kept as internal function
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
   // Delete order function with SweetAlert confirmation
-  const handleDeleteOrder = async (orderId) => {
-    // Replace confirm with SweetAlert
+  const handleDeleteOrder = (orderId) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -67,18 +42,7 @@ const OrderList = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const token = localStorage.getItem("access_token");
-          await axios.delete(
-            `http://localhost:80/orders/${orderId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            }
-          );
-          
-          // Remove deleted order from state
-          setOrders(orders.filter(order => order.id !== orderId));
+          await dispatch(deleteOrder(orderId)).unwrap();
           
           // Success message with SweetAlert
           Swal.fire({
@@ -88,12 +52,10 @@ const OrderList = () => {
             confirmButtonColor: '#28a745'
           });
         } catch (err) {
-          console.error("Error deleting order:", err);
-          
           // Error message with SweetAlert
           Swal.fire({
             title: 'Error!',
-            text: err.response?.data?.message || "Failed to delete order",
+            text: err || "Failed to delete order",
             icon: 'error',
             confirmButtonColor: '#dc3545'
           });
@@ -105,24 +67,7 @@ const OrderList = () => {
   // Complete order function with SweetAlert
   const handleCompleteOrder = async (orderId) => {
     try {
-      const token = localStorage.getItem("access_token");
-      
-      await axios.post(
-        `http://localhost:80/orders/complete/${orderId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-      
-      // Update order status in the UI without refetching all orders
-      setOrders(orders.map(order => 
-        order.id === orderId 
-          ? { ...order, status: "completed" } 
-          : order
-      ));
+      await dispatch(completeOrder(orderId)).unwrap();
       
       // Success message with SweetAlert
       Swal.fire({
@@ -133,12 +78,10 @@ const OrderList = () => {
         confirmButtonColor: '#28a745'
       });
     } catch (err) {
-      console.error("Error completing order:", err);
-      
       // Error message with SweetAlert
       Swal.fire({
         title: 'Error!',
-        text: err.response?.data?.message || "Failed to complete order",
+        text: err || "Failed to complete order",
         icon: 'error',
         confirmButtonColor: '#dc3545'
       });
@@ -174,22 +117,6 @@ const OrderList = () => {
     });
   };
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  // Format date
-  const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    
-    const date = new Date(dateString);
-    return date.toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
   // Get status badge class
   const getStatusBadgeClass = (status) => {
     switch (status?.toLowerCase()) {
@@ -208,7 +135,7 @@ const OrderList = () => {
 
   // Handle refresh button click with SweetAlert notification
   const handleRefresh = () => {
-    fetchOrders();
+    dispatch(fetchOrders());
     
     // Show a toast notification
     const Toast = Swal.mixin({
