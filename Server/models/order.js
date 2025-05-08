@@ -44,8 +44,20 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: DataTypes.STRING,
-    status: DataTypes.STRING,
-    date: DataTypes.DATE
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'pending'
+    },
+    date: DataTypes.DATE,
+    paymentStatus: {
+      type: DataTypes.STRING,
+      defaultValue: 'unpaid'
+    },
+    paymentMethod: DataTypes.STRING,
+    transactionId: DataTypes.STRING,
+    transactionToken: DataTypes.STRING,
+    totalAmount: DataTypes.INTEGER,
+    transferProof: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Order',
