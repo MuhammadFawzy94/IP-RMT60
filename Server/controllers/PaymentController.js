@@ -53,7 +53,7 @@ module.exports = class PaymentController {
             data: order,
           });
         } catch (error) {
-          console.error("Error in donePayment:", error);
+          console.error(error);
           next(error);
         }
     }
@@ -126,7 +126,7 @@ module.exports = class PaymentController {
             amount: order.totalAmount
           });
         } catch (error) {
-          console.error("Error in initiatePayment:", error);
+          console.error(error);
           next(error);
         }
       }
