@@ -26,7 +26,9 @@ module.exports = class PublicController {
                 },
                 order: [['id', 'ASC']]
             })
-            res.status(200).json(mechanics)
+
+            const packages = await Package.findAll()
+            res.status(200).json(mechanics, packages)
         } catch (error) {
             next(error)
         }
@@ -66,6 +68,42 @@ module.exports = class PublicController {
             }
 
             res.status(200).json(mechanic)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getPackage(req, res, next) {
+
+        try {
+            const packages = await Package.findAll({
+                order: [['id', 'ASC']]
+            })
+
+            res.status(200).json(packages)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async getPostById(req, res, next) {
+        try {
+            const { id } = req.params
+
+            const post = await Post.findByPk(id, {
+                include: {
+                    model: Mechanic,
+                    attributes: ['id', 'fullName', 'speciality', 'experience'],
+                },
+                attributes: {
+                    exclude: ['MechanicId', 'createdAt', 'updatedAt']
+                }
+            })
+
+            if (!post) {
+                return res.status(404).json({ message: 'Post not found' })
+            }
+
+            res.status(200).json(post)
         } catch (error) {
             next(error)
         }
