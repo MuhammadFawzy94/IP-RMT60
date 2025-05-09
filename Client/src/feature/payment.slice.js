@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Define base URL for all API requests
+const BASE_URL = 'https://api.muhammadfawzy.web.id'; // Use local development server
+
 // Initiate payment with Midtrans
 export const initiatePayment = createAsyncThunk(
   'payment/initiatePayment',
   async (orderId, { rejectWithValue }) => {
     try {
+      console.log('Initiating payment for order:', orderId);
       const token = localStorage.getItem('access_token');
       const response = await axios.post(
-        'https://api.muhammadfawzy.web.id/payment/initiate',
+        `${BASE_URL}/payment/initiate`,
         { orderId },
         {
           headers: {
@@ -16,9 +20,14 @@ export const initiatePayment = createAsyncThunk(
           },
         }
       );
+      console.log('Payment initiation response:', response.data);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to initiate payment');
+      console.error('Payment initiation error:', error);
+      return rejectWithValue(
+        error.response?.data?.message || 
+        'Failed to initiate payment. Please try again later.'
+      );
     }
   }
 );
@@ -30,7 +39,7 @@ export const checkPaymentStatus = createAsyncThunk(
     try {
       const token = localStorage.getItem('access_token');
       const response = await axios.get(
-        `https://api.muhammadfawzy.web.id/orders/${orderId}/payment-status`,
+        `${BASE_URL}/orders/${orderId}/payment-status`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,7 +59,7 @@ export const deleteOrder = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('access_token');
-      await axios.delete(`https://api.muhammadfawzy.web.id/orders/${orderId}`, {
+      await axios.delete(`${BASE_URL}/orders/${orderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

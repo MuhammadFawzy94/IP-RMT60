@@ -3,11 +3,20 @@ const midtransClient = require("midtrans-client");
 const path = require("path");  // Add this import
 const fs = require("fs").promises; 
 // Move the Midtrans configuration to a reusable function
+// Update this function in your PaymentController.js
 const getSnapClient = () => {
+  const serverKey = process.env.MIDTRANS_SERVER_KEY || 'SB-Mid-server-xxxxx';
+  const clientKey = process.env.MIDTRANS_CLIENT_KEY || 'SB-Mid-client-xxxxx';
+  
+  console.log('Initializing Midtrans with environment:', {
+    isProduction: process.env.NODE_ENV === 'production',
+    serverKeyPrefix: serverKey.substring(0, 10) + '...' // Log partially for security
+  });
+  
   return new midtransClient.Snap({
     isProduction: process.env.NODE_ENV === 'production',
-    serverKey: process.env.MIDTRANS_SERVER_KEY,
-    clientKey: process.env.MIDTRANS_CLIENT_KEY
+    serverKey,
+    clientKey
   });
 };
 
@@ -181,6 +190,7 @@ module.exports = class PaymentController {
 
       static async initiatePayment(req, res, next) {
         try {
+          console.log('Payment initiation request received:', req.body);
           const { orderId } = req.body;
           
           if (!orderId) {
@@ -195,69 +205,22 @@ module.exports = class PaymentController {
               { model: User }
             ]
           });
-    
+      
+          console.log('Order found:', order ? 'Yes' : 'No');
+          
           if (!order) {
             return res.status(404).json({ message: "Order not found" });
           }
-    
-          if (order.paymentStatus === 'paid') {
-            return res.status(400).json({ message: "Order has already been paid" });
-          }
-          
-          // Check if required data exists
-          if (!order.Package || !order.User) {
-            return res.status(400).json({ message: "Incomplete order information" });
-          }
-    
-          // Get the Snap client
-          const snap = getSnapClient();
-    
-          // Create a unique transaction ID
-          const transactionId = `ORDER-${order.id}-${Date.now()}`;
-    
-          // Prepare Midtrans parameters
-          let parameter = {
-            transaction_details: {
-              order_id: transactionId,
-              gross_amount: parseInt(order.totalAmount) || 10000,  // Ensure integer
-            },
-            credit_card: {
-              secure: true,
-            },
-            customer_details: {
-              first_name: order.User.email.split('@')[0] || "Customer",
-              email: order.User.email || "customer@example.com",
-              phone: order.User.phoneNumber || "08111222333",
-            },
-            item_details: [
-              {
-                id: String(order.Package.id || "PKG1"),  // Ensure string
-                price: parseInt(order.Package.price) || 10000,  // Ensure integer
-                quantity: 1,
-                name: order.Package.namePackage || "Service Package",
-              }
-            ]
-          };
-    
-          // Create transaction and get token
-          const transaction = await snap.createTransaction(parameter);
-          const transactionToken = transaction.token;
-    
-          // Update order with transaction information
-          await order.update({
-            transactionId,
-            transactionToken,
-          });
-    
-          res.json({ 
-            message: "Payment initiated successfully", 
-            transactionToken,
-            orderId: order.id,
-            amount: order.totalAmount
-          });
+      
+          // ... rest of the method
         } catch (error) {
           console.error("Error in initiatePayment:", error);
-          next(error);
+          
+          // More detailed error response
+          res.status(500).json({
+            message: "Failed to initiate payment",
+            error: process.env.NODE_ENV === 'production' ? undefined : error.message
+          });
         }
       }
     
