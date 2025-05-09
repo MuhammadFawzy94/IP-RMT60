@@ -8,7 +8,7 @@ export const initiatePayment = createAsyncThunk(
     try {
       const token = localStorage.getItem('access_token');
       const response = await axios.post(
-        'http://localhost:80/payment/initiate',
+        'https://api.muhammadfawzy.web.id/payment/initiate',
         { orderId },
         {
           headers: {
@@ -30,7 +30,7 @@ export const checkPaymentStatus = createAsyncThunk(
     try {
       const token = localStorage.getItem('access_token');
       const response = await axios.get(
-        `http://localhost:80/orders/${orderId}/payment-status`,
+        `https://api.muhammadfawzy.web.id/orders/${orderId}/payment-status`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ export const deleteOrder = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('access_token');
-      await axios.delete(`http://localhost:80/orders/${orderId}`, {
+      await axios.delete(`https://api.muhammadfawzy.web.id/orders/${orderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

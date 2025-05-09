@@ -20,7 +20,7 @@ export const fetchPackages = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("access_token");
-      const response = await axios.get("http://localhost:80/packages", {
+      const response = await axios.get("https://api.muhammadfawzy.web.id/packages", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

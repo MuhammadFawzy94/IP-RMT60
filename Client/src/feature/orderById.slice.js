@@ -13,7 +13,7 @@ export const fetchOrders = createAsyncThunk(
       }
       
       const response = await axios.get(
-        `http://localhost:80/orders`,
+        `https://api.muhammadfawzy.web.id/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -35,7 +35,7 @@ export const deleteOrder = createAsyncThunk(
     try {
       const token = localStorage.getItem("access_token");
       await axios.delete(
-        `http://localhost:80/orders/${orderId}`,
+        `https://api.muhammadfawzy.web.id/orders/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -56,7 +56,7 @@ export const completeOrder = createAsyncThunk(
     try {
       const token = localStorage.getItem("access_token");
       await axios.post(
-        `http://localhost:80/orders/complete/${orderId}`,
+        `https://api.muhammadfawzy.web.id/orders/complete/${orderId}`,
         {},
         {
           headers: {
