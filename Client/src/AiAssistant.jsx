@@ -21,7 +21,7 @@ function AiAssistant() {
   const [error, setError] = useState("");
   const [history, setHistory] = useState([]);
 
-  const API_URL = "http://localhost:80/api/gemini";
+  const API_URL = "https://api.muhammadfawzy.web.id/api/gemini";
 
   const commonPrompts = [
     "Bagaimana memeriksa dan mengganti oli motor?",

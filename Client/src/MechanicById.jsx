@@ -14,7 +14,7 @@ const MechanicById = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const response = await axios.get(`http://localhost:80/mechanics/${id}`,
+        const response = await axios.get(`https://api.muhammadfawzy.web.id/mechanics/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,

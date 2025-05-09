@@ -35,7 +35,7 @@ export default function Register() {
 
     setIsLoading(true);
     try {
-      await axios.post('http://localhost:80/register', {
+      await axios.post('https://api.muhammadfawzy.web.id/register', {
         email,
         password,
         address,
