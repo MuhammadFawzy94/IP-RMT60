@@ -12,7 +12,7 @@ const MechanicController = require("./controllers/MechanicController");
 const PostController = require("./controllers/PostController");
 const errorHandler = require("./middlewares/errorHandler");
 const OrderController = require("./controllers/OrderController");
-const Order = require("./models/Order");
+const Order = require("./models/order");
 const { geminiApi } = require("./helpers/gemini"); 
 const PaymentController = require("./controllers/PaymentController");
 

@@ -12,6 +12,8 @@ import Payment from "./Payment"
 import OrderById from "./orderById"
 import GeminiAssistant from "./AiAssistant"
 import AiAssistant from "./AiAssistant"
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 // import GeminiAssistant from './GeminiAssistant';
 
@@ -29,6 +31,7 @@ function AuthenticatedLayout() {
 function App() {
 
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
@@ -46,6 +49,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </Provider>
   )
 }
 

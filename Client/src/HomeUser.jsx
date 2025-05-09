@@ -1,62 +1,32 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Cards, CardsPackage } from "./assets/Components/cards";
+import { 
+  fetchMechanics, 
+  fetchPackages, 
+  setSearchTerm 
+} from "./feature/home.slice";
 
 const HomeUser = () => {
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [dataPackage, setDataPackage] = useState([]);
+  const dispatch = useDispatch();
+  const {  
+    filteredMechanics, 
+    packages, 
+    searchTerm, 
+    isLoadingMechanics, 
+    error 
+  } = useSelector((state) => state.mechanic);
 
-  // Fetch data
+  // Fetch data on component mount
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const response = await axios.get("http://localhost:80/");
-        setData(response.data);
-        setFilteredData(response.data);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-        setError("Failed to fetch mechanics. Please try again later.");
-        setIsLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchMechanics());
+    dispatch(fetchPackages());
+  }, [dispatch]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const response = await axios.get("http://localhost:80/packages", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        });
-        console.log("API Response:", response.data);
-        setDataPackage(response.data);
-      } catch (err) {
-        console.log(err);
-        setError("Failed to fetch mechanics. Please try again later.");
-      }
-    }
-    fetchData();
-  }, []);
-
-  // Handle search
-  useEffect(() => {
-    const filtered = data.filter(
-      (item) =>
-        item.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.speciality.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.location.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredData(filtered);
-  }, [searchTerm, data]);
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    dispatch(setSearchTerm(e.target.value));
+  };
 
   return (
     <>
@@ -76,7 +46,7 @@ const HomeUser = () => {
                 className="form-control rounded-pill shadow-sm"
                 placeholder="Search by name or speciality or location..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleSearchChange}
               />
             </div>
           </div>
@@ -85,10 +55,12 @@ const HomeUser = () => {
         <div>
           <h2 className="text-center mb-4">-------- Package List --------</h2>
         </div>
+
+        {/* Packages Section */}
         <section className="py-5 bg-light">
           <div className="container">
             <div className="row">
-              {dataPackage.map((dataPackage) => (
+              {packages.map((dataPackage) => (
                 <div className="col-md-3 mb-4" key={dataPackage.id}>
                   <CardsPackage dataPackage={dataPackage} />
                 </div>
@@ -96,12 +68,14 @@ const HomeUser = () => {
             </div>
           </div>
         </section>
+        
         <div>
           <h2 className="text-center mb-4">
             -------- Featured Mechanics --------
           </h2>
         </div>
-        {/* Main Content */}
+        
+        {/* Main Content - Mechanics */}
         <section className="py-5 bg-light">
           <div className="container">
             {error && (
@@ -110,7 +84,7 @@ const HomeUser = () => {
               </div>
             )}
             <div className="row">
-              {isLoading ? (
+              {isLoadingMechanics ? (
                 // Skeleton Loading
                 Array(6)
                   .fill()
@@ -127,8 +101,8 @@ const HomeUser = () => {
                     </div>
                   ))
               ) : // Data Cards
-              filteredData.length > 0 ? (
-                filteredData.map((item, index) => (
+              filteredMechanics.length > 0 ? (
+                filteredMechanics.map((item, index) => (
                   <div
                     className="col-md-4 mb-4"
                     style={{ animationDelay: `${index * 0.1}s` }}
