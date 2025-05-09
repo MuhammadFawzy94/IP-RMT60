@@ -26,18 +26,20 @@ const allowedOrigins = [
   "http://localhost:5173"             // Local frontend (Vite)
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Optional: If using cookies/auth headers
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true, // Optional: If using cookies/auth headers
+//   })
+// );
+
+app.use(cors())
 
 // === Body Parsers ===
 app.use(express.urlencoded({ extended: false }));
