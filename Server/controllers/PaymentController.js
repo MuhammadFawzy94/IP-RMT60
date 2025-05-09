@@ -212,7 +212,58 @@ module.exports = class PaymentController {
             return res.status(404).json({ message: "Order not found" });
           }
       
-          // ... rest of the method
+          if (order.paymentStatus === 'paid') {
+            return res.status(400).json({ message: "Order has already been paid" });
+          }
+      
+          // Get the Snap client
+          const snap = getSnapClient();
+      
+          // Create a unique transaction ID
+          const transactionId = `ORDER-${order.id}-${Date.now()}`;
+      
+          // Prepare Midtrans parameters with error handling for null values
+          let parameter = {
+            transaction_details: {
+              order_id: transactionId,
+              gross_amount: parseInt(order.totalAmount || order.Package?.price || 10000),
+            },
+            credit_card: {
+              secure: true,
+            },
+            customer_details: {
+              first_name: order.User?.email?.split('@')[0] || "Customer",
+              email: order.User?.email || "customer@example.com",
+              phone: order.User?.phoneNumber || "08111222333",
+            },
+            item_details: [
+              {
+                id: String(order.Package?.id || "PKG1"),
+                price: parseInt(order.Package?.price || 10000),
+                quantity: 1,
+                name: order.Package?.namePackage || "Service Package",
+              }
+            ]
+          };
+      
+          console.log('Transaction parameters:', JSON.stringify(parameter));
+      
+          // Create transaction and get token
+          const transaction = await snap.createTransaction(parameter);
+          const transactionToken = transaction.token;
+      
+          // Update order with transaction information
+          await order.update({
+            transactionId,
+            transactionToken,
+          });
+      
+          res.json({ 
+            message: "Payment initiated successfully", 
+            transactionToken,
+            orderId: order.id,
+            amount: parameter.transaction_details.gross_amount
+          });
         } catch (error) {
           console.error("Error in initiatePayment:", error);
           
