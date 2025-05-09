@@ -49,7 +49,7 @@ export const createOrder = createAsyncThunk(
     try {
       const token = localStorage.getItem("access_token");
       const response = await axios.post(
-        "http://localhost:80/orders",
+        "https://api.muhammadfawzy.web.id/orders",
         orderData,
         {
           headers: {

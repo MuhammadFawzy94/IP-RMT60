@@ -6,7 +6,7 @@ export const fetchPublicArticles = createAsyncThunk(
   'article/fetchPublicArticles',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:80/pubposts');
+      const response = await axios.get('https://api.muhammadfawzy.web.id/pubposts');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch articles');
@@ -24,7 +24,7 @@ export const fetchUserArticles = createAsyncThunk(
         return rejectWithValue('Authentication required');
       }
       
-      const response = await axios.get('http://localhost:80/postsUser', {
+      const response = await axios.get('https://api.muhammadfawzy.web.id/postsUser', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -46,7 +46,7 @@ export const createArticle = createAsyncThunk(
         return rejectWithValue('Authentication required');
       }
       
-      const response = await axios.post('http://localhost:80/posts', articleData, {
+      const response = await axios.post('https://api.muhammadfawzy.web.id/posts', articleData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -68,7 +68,7 @@ export const deleteArticle = createAsyncThunk(
         return rejectWithValue('Authentication required');
       }
       
-      await axios.delete(`http://localhost:80/posts/${articleId}`, {
+      await axios.delete(`https://api.muhammadfawzy.web.id/posts/${articleId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
