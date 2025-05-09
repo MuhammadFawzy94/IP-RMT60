@@ -41,7 +41,7 @@ export default function Login() {
     setIsLoading(true);
     try {
       console.log("Sending login request to server");
-      const { data } = await axios.post('http://localhost:80/login', {
+      const { data } = await axios.post('https://api.muhammadfawzy.web.id/login', {
         email,
         password,
       });
@@ -58,7 +58,7 @@ export default function Login() {
   async function handleCredentialResponse(response) {
     console.log("Google login response received:", response);
     try {
-      const { data } = await axios.post("http://localhost:80/googleLogin", {
+      const { data } = await axios.post("https://api.muhammadfawzy.web.id/googleLogin", {
         googleToken: response.credential,
       });
       console.log("Google login successful:", data);

@@ -16,7 +16,7 @@ const Home = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:80/");
+        const response = await axios.get("https://api.muhammadfawzy.web.id/");
         setData(response.data);
         setFilteredData(response.data);
         setIsLoading(false);
